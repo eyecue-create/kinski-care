@@ -30,13 +30,13 @@ function save(){localStorage.setItem(KEY,JSON.stringify(store))}
 function empty(dt){return{date:dt,items:{},meals:{morning:{food:"",appetite:"",note:""},midday:{food:"",appetite:"",note:""},evening:{food:"",appetite:"",note:""}},journal:""}}
 function day(dt){if(!store[dt])store[dt]=empty(dt);return store[dt]}
 function tasks(dt){return T.filter(function(t){return !t.u||dt<=t.u})}
-function overdue(t,dt,n){n=n||new Date();if(dt!==dk(n))return false;if(day(dt).items[t.id]&&day(dt).items[t.id].done)return false;return mins(n)>t.b+GRACE}
+function overdue(t,dt,n){n=n||new Date();if(dt!==dk(n))return false;if(day(dt).items[t.id]&&day(dt).items[t.id].done)return false;var m=mins(n);if(t.b<360){return m>t.b+GRACE&&m<360}return m>t.b+GRACE}
 function isNow(t,dt,n){n=n||new Date();if(dt!==dk(n))return false;if(day(dt).items[t.id]&&day(dt).items[t.id].done)return false;var m=mins(n);return m>=t.a-15&&m<=t.b+10}
 function toggle(id){var d=day(date),c=d.items[id]||{done:false},done=!c.done;d.items[id]={done:done,doneAt:done?new Date().toISOString():undefined};save();render()}
 function setMeal(m,p){var d=day(date);d.meals[m]=Object.assign({},d.meals[m],p);save()}
 function setJournal(v){day(date).journal=v;save()}
 function doneAt(iso){if(!iso)return"";try{return new Intl.DateTimeFormat("de-DE",{timeZone:TZ,hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(new Date(iso))}catch(e){return""}}
-function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function esc(s){return String(s).replace(/&/g,"&").replace(/</g,"<").replace(/>/g,">").replace(/"/g,""")}
 function attr(s){return esc(s).replace(/'/g,"&#39;")}
 function renderTask(t){
 var d=day(date),it=d.items[t.id]||{},done=!!it.done,od=overdue(t,date),nw=isNow(t,date),meal=t.m?d.meals[t.m]:null;
