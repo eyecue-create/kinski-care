@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img">
+  <rect width="128" height="128" rx="28" fill="#5c7a5a"/>
+  <circle cx="64" cy="58" r="28" fill="#f3eee4"/>
+  <ellipse cx="52" cy="52" rx="5" ry="7" fill="#1c1914"/>
+  <ellipse cx="76" cy="52" rx="5" ry="7" fill="#1c1914"/>
+  <path d="M52 68c6 8 18 8 24 0" fill="none" stroke="#1c1914" stroke-width="4" stroke-linecap="round"/>
+  <path d="M28 40c-6-2-12 4-8 10 6 2 12-4 8-10zM100 40c6-2 12 4 8 10-6 2-12-4-8-10z" fill="#f3eee4"/>
+  <text x="64" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#f7faf6">Kinski</text>
+</svg>
