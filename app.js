@@ -9,7 +9,7 @@ var T=[
 {id:"m5",s:"m",t:"Kalium",d:"1,75ml",tl:"9:00-10:00",a:540,b:600,k:"med"},
 {id:"d1",s:"d",t:"Mittagessen",tl:"14:00-15:00",a:840,b:900,k:"food",m:"midday"},
 {id:"d2",s:"d",t:"Kalium",d:"1,75ml",tl:"15:00-16:00",a:900,b:960,k:"med",u:"2026-08-19",w:"Nur bis 19.8."},
-{id:"d3",s:"d",t:"Futter weg",tl:"ab 16:00",a:960,b:1020,k:"note"},
+{id:"d3",s:"d",t:"Futter weg",tl:"ab 18:00",a:1080,b:1140,k:"note"},
 {id:"e1",s:"e",t:"Vetmedin",d:"3/4",c:"#8B5A2B",tl:"19:30-20:00",a:1170,b:1200,k:"med",w:"Nüchtern - 1h kein Futter"},
 {id:"e2",s:"e",t:"Abendessen",tl:"20:30-21:00",a:1230,b:1260,k:"food",m:"evening"},
 {id:"e3",s:"e",t:"Schilddrüse",d:"1x",tl:"21:00-22:00",a:1260,b:1320,k:"med"},
@@ -19,7 +19,7 @@ var T=[
 {id:"e7",s:"e",t:"Kalium",d:"1,75ml",tl:"21:00-22:00",a:1260,b:1320,k:"med"},
 {id:"e8",s:"e",t:"Futter nachts weg",tl:"ab 2:00",a:120,b:180,k:"note"}
 ];
-var SEC=[{id:"m",title:"Morgens",hint:"Vetmedin nüchtern"},{id:"d",title:"Mittags",hint:"Futter weg ab 16:00"},{id:"e",title:"Abends",hint:"Vetmedin nüchtern"}];
+var SEC=[{id:"m",title:"Morgens",hint:"Vetmedin nüchtern"},{id:"d",title:"Mittags",hint:"Futter weg ab 18:00"},{id:"e",title:"Abends",hint:"Vetmedin nüchtern"}];
 var date=dk(),store=load();
 function parts(d){d=d||new Date();var f=new Intl.DateTimeFormat("en-GB",{timeZone:TZ,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"});var p={};f.formatToParts(d).forEach(function(x){p[x.type]=x.value});return{y:+p.year,m:+p.month,d:+p.day,h:+p.hour,mi:+p.minute};}
 function dk(d){var p=parts(d);return p.y+"-"+String(p.m).padStart(2,"0")+"-"+String(p.d).padStart(2,"0");}
@@ -37,7 +37,7 @@ function toggle(id){var d=day(date),c=d.items[id]||{done:false},done=!c.done;d.i
 function setMeal(m,p){var d=day(date);d.meals[m]=Object.assign({},d.meals[m],p);save();}
 function setJournal(v){day(date).journal=v;save();}
 function doneAt(iso){if(!iso)return"";try{return new Intl.DateTimeFormat("de-DE",{timeZone:TZ,hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(new Date(iso));}catch(e){return "";}}
-function esc(s){return String(s).split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;").split('"').join("&quot;");}
+function esc(s){return String(s).split("&").join("&").split("<").join("<").split(">").join(">").split('"').join(""");}
 function attr(s){return esc(s).split("'").join("&#39;");}
 function renderTask(t){
 var d=day(date),it=d.items[t.id]||{},done=!!it.done,od=overdue(t,date),nw=isNow(t,date),meal=t.m?d.meals[t.m]:null;
